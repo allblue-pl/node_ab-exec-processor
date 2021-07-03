@@ -1,0 +1,7 @@
+{
+  "name": "ab-exec-processor",
+  "version": "0.0.1",
+  "dependencies": {
+    "js0": "0.0.*"
+  }
+}
