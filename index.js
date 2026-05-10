@@ -1,3 +1,2 @@
-'use strict';
-
-module.exports = require('./lib');
+import abExecProcessor from "./lib/index.js";
+export default abExecProcessor;
