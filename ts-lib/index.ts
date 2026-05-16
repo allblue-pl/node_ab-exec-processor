@@ -6,7 +6,7 @@ export class abExecProcessor_Class {
     }
 
     process(args: Array<string>, offset: number, presets: Array<ExecPreset>) {
-        let argValues: { [name:string]: string|undefined } = {};
+        let argValues: { [name:string]: string } = {};
         let args_Used: Array<number> = [];
 
         for (let preset of presets) {
@@ -45,11 +45,15 @@ export class abExecProcessor_Class {
         }
 
         for (let preset of presets) {
-            if (!(preset.name in argValues))
-                argValues[preset.name] = preset.defaultValue;
+            if (!(preset.name in argValues)) {
+                if (preset.defaultValue !== undefined)
+                    argValues[preset.name] = preset.defaultValue;
+            }
 
-            if (argValues[preset.name] === undefined && preset.required)
+            if (argValues[preset.name] === undefined && preset.required) {
+                console.error(`Arg '${preset.name}' info: `, preset);
                 throw new Error(`Arg '${preset.name}' not set.`);
+            }
 
             if (preset.values !== undefined) {
                 if (!preset.values.includes(argValues[preset.name] as string)) {
@@ -92,10 +96,10 @@ class abExecProcessor_Args {
     }
 
 
-    #argValues: { [name:string]: string|undefined };
+    #argValues: { [name:string]: string };
 
 
-    constructor(argValues: { [name:string]: string|undefined }) {
+    constructor(argValues: { [name:string]: string }) {
         this.#argValues = argValues;
     }
 

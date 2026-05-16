@@ -10,9 +10,9 @@ declare class abExecProcessor_Args {
     #private;
     get valid(): boolean;
     constructor(argValues: {
-        [name: string]: string | undefined;
+        [name: string]: string;
     });
-    $(argName: string): string | undefined;
+    $(argName: string): string;
     isSet(argName: string): boolean;
     log(): void;
 }
